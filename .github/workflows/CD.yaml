@@ -20,6 +20,24 @@ permissions:
   packages: write
 
 jobs:
+  test:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 20
+        cache: npm
+
+    - run: npm ci
+    - run: npm run lint
+    - run: npm test
+    - run: npm run build
+    - uses: nikeee/setup-hurl@v2
+    - run: |
+        ./load-model.sh
+        node dist/server.js &
+        sleep 10s
+        hurl tests/classify.hurl
+
   build:
     name: Build
     runs-on: ubuntu-latest
