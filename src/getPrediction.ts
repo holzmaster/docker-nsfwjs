@@ -1,17 +1,27 @@
-import * as path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import * as tf from "@tensorflow/tfjs-node";
-import * as nsfwjs from "nsfwjs";
+import { load as loadNsfwJs, type NSFWJS } from "nsfwjs";
 import sharp from "sharp";
 
 import config from "./config.js";
 
 tf.enableProdMode();
 
-const model = await nsfwjs.load(pathToFileURL(path.join(config.modelDir, "model.json")).toString(), { type: "graph" } as unknown as { size: number });
+const modelUrl = "http://localhost:" + config.port + "/model/model.json";
+console.log(modelUrl.toString());
+
+let modelPromise: null | Promise<NSFWJS> = null;
 
 export async function getPrediction(imageBuffer: Buffer) {
+	if (modelPromise === null) {
+		modelPromise = loadNsfwJs(modelUrl, { type: "graph" } as unknown as {
+			size: number;
+		});
+	}
+
+	const model = await modelPromise;
+
 	const jpeg = await sharp(imageBuffer)
 		.jpeg({ quality: 100 })
 		.resize({
