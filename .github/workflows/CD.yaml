@@ -4,7 +4,7 @@ on:
   push:
     workflow_dispatch:
     branches:
-      - master
+      - main
 
 env:
   REGISTRY_URL: "ghcr.io"
