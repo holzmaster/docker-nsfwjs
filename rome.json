@@ -16,6 +16,6 @@
     }
   },
   "files": {
-    "ignore": ["node_modules/*", "dist/*", "src/graphql/nexus-typegen.ts"]
+    "ignore": ["node_modules/*", "dist/*"]
   }
 }
