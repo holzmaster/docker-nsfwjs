@@ -29,28 +29,13 @@ If you are deploying in production, you will probably want to pass the `--restar
 
 ```json
 {
-  "prediction": [
-    {
-      "className": "Neutral",
-      "probability": 0.6371303796768188
-    },
-    {
-      "className": "Drawing",
-      "probability": 0.3603636920452118
-    },
-    {
-      "className": "Hentai",
-      "probability": 0.0024505197070538998
-    },
-    {
-      "className": "Sexy",
-      "probability": 0.00003775714503717609
-    },
-    {
-      "className": "Porn",
-      "probability": 0.000017730137187754735
-    }
-  ]
+  "prediction": {
+    "neutral": 0.9992233514785767,
+    "drawing": 0.0006749277818016708,
+    "porn": 0.00004637416350306012,
+    "sexy": 0.000037574754969682544,
+    "hentai": 0.000017801607100409456
+  }
 }
 ```
 
@@ -61,50 +46,20 @@ If you are deploying in production, you will probably want to pass the `--restar
 ```json
 {
   "predictions": [
-    [
-      {
-        "className": "Neutral",
-        "probability": 0.6371303796768188
-      },
-      {
-        "className": "Drawing",
-        "probability": 0.3603636920452118
-      },
-      {
-        "className": "Hentai",
-        "probability": 0.0024505197070538998
-      },
-      {
-        "className": "Sexy",
-        "probability": 0.00003775714503717609
-      },
-      {
-        "className": "Porn",
-        "probability": 0.000017730137187754735
-      }
-    ],
-    [
-      {
-        "className": "Neutral",
-        "probability": 0.9498893618583679
-      },
-      {
-        "className": "Drawing",
-        "probability": 0.04626458138227463
-      },
-      {
-        "className": "Hentai",
-        "probability": 0.00267870188690722
-      },
-      {
-        "className": "Sexy",
-        "probability": 0.0008198379655368626
-      },
-      {
-        "className": "Porn",
-        "probability": 0.0003475486591923982
-      }
-    ]
+    {
+      "neutral": 0.9992233514785767,
+      "drawing": 0.0006749277818016708,
+      "porn": 0.00004637416350306012,
+      "sexy": 0.000037574754969682544,
+      "hentai": 0.000017801607100409456
+    },
+    {
+      "neutral": 0.9992233514785767,
+      "drawing": 0.0006749277818016708,
+      "porn": 0.00004637416350306012,
+      "sexy": 0.000037574754969682544,
+      "hentai": 0.000017801607100409456
+    }
   ]
 }
 ```
