@@ -1,10 +1,14 @@
+import { pathToFileURL } from "node:url";
+
 import * as tf from "@tensorflow/tfjs-node";
 import * as nsfwjs from "nsfwjs";
 import sharp from "sharp";
 
+import config from "./config.js";
+
 tf.enableProdMode();
 
-const model = await nsfwjs.load("file://src/model/", { type: "graph" });
+const model = await nsfwjs.load(pathToFileURL(config.modelDir).toString());
 
 export async function getPrediction(imageBuffer: Buffer) {
 	const jpeg = await sharp(imageBuffer)
