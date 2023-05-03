@@ -9,7 +9,6 @@ import config from "./config.js";
 tf.enableProdMode();
 
 const modelUrl = "http://localhost:" + config.port + "/model/model.json";
-console.log(modelUrl.toString());
 
 let modelPromise: null | Promise<NSFWJS> = null;
 
