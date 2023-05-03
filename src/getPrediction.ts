@@ -8,7 +8,11 @@ import config from "./config.js";
 
 tf.enableProdMode();
 
-const model = await nsfwjs.load(pathToFileURL(config.modelDir).toString());
+const modelDir = config.modelDir.endsWith("/")
+	? config.modelDir
+	: config.modelDir + "/";
+
+const model = await nsfwjs.load(modelDir);
 
 export async function getPrediction(imageBuffer: Buffer) {
 	const jpeg = await sharp(imageBuffer)

@@ -33,8 +33,8 @@ export async function routes(
 						},
 					},
 					required: ["content"],
-				}
-			}
+				},
+			},
 		},
 		async (req, res) => {
 			const image = (req.body as any).content[0] as BodyEntry;
@@ -60,8 +60,8 @@ export async function routes(
 						},
 					},
 					required: ["contents"],
-				}
-			}
+				},
+			},
 		},
 		async (req, res) => {
 			const images = (req.body as any).contents as BodyEntry[];
