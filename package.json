@@ -20,7 +20,6 @@
   "devDependencies": {
     "json-schema-to-ts": "^2.8.0",
     "rome": "^12.0.0",
-    "swc": "^1.0.11",
     "typescript": "^5.0.4"
   }
 }

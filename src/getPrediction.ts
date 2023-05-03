@@ -1,3 +1,4 @@
+import * as path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import * as tf from "@tensorflow/tfjs-node";
@@ -8,11 +9,7 @@ import config from "./config.js";
 
 tf.enableProdMode();
 
-const modelDir = config.modelDir.endsWith("/")
-	? config.modelDir
-	: config.modelDir + "/";
-
-const model = await nsfwjs.load(modelDir);
+const model = await nsfwjs.load(pathToFileURL(path.join(config.modelDir, "model.json")).toString(), { type: "graph" } as unknown as { size: number });
 
 export async function getPrediction(imageBuffer: Buffer) {
 	const jpeg = await sharp(imageBuffer)
