@@ -1,25 +1,13 @@
-import { pathToFileURL } from "node:url";
-
 import * as tf from "@tensorflow/tfjs-node";
-import { load as loadNsfwJs, type NSFWJS } from "nsfwjs";
+import { load as loadNsfwJs } from "nsfwjs";
 import sharp from "sharp";
-
-import config from "./config.js";
 
 tf.enableProdMode();
 
-const modelUrl = `http://localhost:${config.port}/model/model.json`;
-
-let modelPromise: null | Promise<NSFWJS> = null;
+// Using publicly hosted models. May fail some day because some random guy pulls down his s3 bucket
+const model = await loadNsfwJs();
 
 export async function getPrediction(imageBuffer: Buffer) {
-	if (modelPromise === null) {
-		modelPromise = loadNsfwJs(modelUrl, { type: "graph" } as unknown as {
-			size: number;
-		});
-	}
-
-	const model = await modelPromise;
 
 	const jpeg = await sharp(imageBuffer)
 		.jpeg({ quality: 100 })
