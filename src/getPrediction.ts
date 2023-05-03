@@ -23,7 +23,6 @@ export async function getPrediction(imageBuffer: Buffer) {
 	try {
 		tfImage = tf.node.decodeImage(jpeg, 3);
 		const prediction = await model.classify(tfImage);
-		console.log(prediction);
 		return prediction;
 	} finally {
 		if (tfImage) {
