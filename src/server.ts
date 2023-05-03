@@ -10,7 +10,7 @@ const fastifyServer = fastify({
 
 fastifyServer.register(multipart, {
 	addToBody: true,
-	sharedSchemaId: "#mySharedSchema",
+	sharedSchemaId: "#sharedSchema",
 });
 
 fastifyServer.register(routes);
@@ -18,7 +18,6 @@ fastifyServer.register(routes);
 await fastifyServer.listen({ port: config.port, host: config.host });
 
 console.log("Server started 🚀");
-
 
 process.on("SIGINT", () => handleOnSignal("SIGINT"));
 process.on("SIGHUP", () => handleOnSignal("SIGHUP"));
