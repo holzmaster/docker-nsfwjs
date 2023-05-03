@@ -21,6 +21,9 @@ permissions:
 
 jobs:
   test:
+    name: Test
+    runs-on: ubuntu-latest
+
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
