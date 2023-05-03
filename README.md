@@ -10,7 +10,7 @@
 ### About 🗞️
 
 A Docker REST API for NSFW detection with [NSFWJS](https://github.com/infinitered/nsfwjs). You can find it on the Docker Hub [here](https://hub.docker.com/r/andresribeiroo/nsfwjs). Hard-fork of [andresribeiro/nsfwjs-docker](https://github.com/andresribeiro/nsfwjs-docker), which has the following goals:
-- Nor standard tooling (npm instead of pnpm, no git hooks, tsc instead of swc)
+- More standard tooling (npm instead of pnpm, no git hooks, tsc instead of swc)
 - Slimmer deployment image + repo (models not in repo, more stages in docker build)
 
 ### Installation ⚙️
