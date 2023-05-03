@@ -13,10 +13,9 @@ import {
 	multipleMultipartFormBodySchema,
 } from "./useCases/multiple/multipartForm.js";
 
-export function routes(
+export async function routes(
 	fastify: FastifyInstance,
 	_opts: FastifyRegisterOptions<FastifyPluginOptions> | undefined,
-	done: (err?: Error | undefined) => void,
 ) {
 	fastify.post(
 		"/single/multipart-form",
@@ -29,6 +28,4 @@ export function routes(
 		{ schema: { body: multipleMultipartFormBodySchema } },
 		MultipleMultipartForm,
 	);
-
-	done();
 }
