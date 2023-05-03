@@ -8,7 +8,7 @@ import config from "./config.js";
 
 tf.enableProdMode();
 
-const modelUrl = "http://localhost:" + config.port + "/model/model.json";
+const modelUrl = `http://localhost:${config.port}/model/model.json`;
 
 let modelPromise: null | Promise<NSFWJS> = null;
 
