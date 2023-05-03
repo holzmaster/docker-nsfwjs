@@ -9,12 +9,14 @@
 
 ### About 🗞️
 
-A Docker REST API for NSFW detection with [NSFWJS](https://github.com/infinitered/nsfwjs). You can find it on the Docker Hub [here](https://hub.docker.com/r/andresribeiroo/nsfwjs). Created for my social network app, [Drakkle](https://play.google.com/store/apps/details?id=com.andresribeiro.drakkle)
+A Docker REST API for NSFW detection with [NSFWJS](https://github.com/infinitered/nsfwjs). You can find it on the Docker Hub [here](https://hub.docker.com/r/andresribeiroo/nsfwjs). Hard-fork of [andresribeiro/nsfwjs-docker](https://github.com/andresribeiro/nsfwjs-docker), which has the following goals:
+- Nor standard tooling (npm instead of pnpm, no git hooks, tsc instead of swc)
+- Slimmer deployment image + repo (models not in repo, more stages in docker build)
 
 ### Installation ⚙️
 
 ```shell
-docker run -p 3333:3333 -d --name nsfwjs andresribeiroo/nsfwjs:1.6
+docker run -p 3333:3333 -d --name nsfwjs ghcr.io/holzmaster/nsfwjs:latest
 ```
 
 If you are deploying in production, you will probably want to pass the `--restart always` flag to start the container whenever the server restarts
@@ -25,7 +27,7 @@ If you are deploying in production, you will probably want to pass the `--restar
 
 `POST` request to `/single/multipart-form` sending an image in the `content` field
 
-```
+```json
 {
   "prediction": [
     {
@@ -56,7 +58,7 @@ If you are deploying in production, you will probably want to pass the `--restar
 
 `POST` request to `/multiple/multipart-form` sending images in the `contents` field
 
-```
+```json
 {
   "predictions": [
     [
