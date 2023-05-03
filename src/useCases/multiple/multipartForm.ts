@@ -29,7 +29,7 @@ export async function MultipleMultipartForm(
 	}>,
 	reply: FastifyReply,
 ) {
-	const images = request.body.contents as BodyEntry[];
+	const images = (request.body as any).contents as BodyEntry[];
 
 	const predictions = await Promise.all(
 		images.map(async (image) => getPrediction(image.data)),

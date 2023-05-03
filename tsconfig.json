@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "lib": ["es6"],
+    "strict": true,
     "removeComments": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
