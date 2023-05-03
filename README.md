@@ -1,4 +1,4 @@
-# nsfwjs-docker
+# docker-nsfwjs
 
 ### Features ✨
 
