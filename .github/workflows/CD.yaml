@@ -39,8 +39,8 @@ jobs:
       - run: |
           ./load-model.sh
           node dist/server.js &
-          sleep 10s
-          hurl tests/classify.hurl
+          sleep 2s
+          hurl --test tests/classify.hurl
 
   build:
     name: Build
