@@ -1,3 +1,5 @@
+import { resolve } from "node:path";
+
 import fastify from "fastify";
 import multipart from "@fastify/multipart";
 import serveStatic from "@fastify/static";
@@ -17,7 +19,7 @@ fastifyServer.register(multipart, {
 // Crappy but working solution. Loading models only seems to be stable when using HTTP, not file://
 // https://github.com/infinitered/nsfwjs/discussions/738#discussioncomment-5792593
 fastifyServer.register(serveStatic, {
-	root: config.modelDir,
+	root: resolve(config.modelDir),
 	prefix: "/model/",
 });
 
