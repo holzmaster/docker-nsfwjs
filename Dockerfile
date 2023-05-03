@@ -28,6 +28,7 @@ FROM node:buster-slim
     WORKDIR /app
     COPY --from=model /model /usr/app/model
     COPY --from=builder /usr/app/node_modules /app/node_modules
+    COPY package.json package-lock.json ./
     COPY --from=builder /usr/app/dist /app/dist
     EXPOSE 3333
     CMD ["node", "dist/server.js"]
