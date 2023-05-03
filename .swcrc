@@ -1,9 +1,5 @@
 {
     "jsc": {
-      "baseUrl": ".",
-      "paths": {
-        "@useCases/*": ["./src/useCases/*"]
-      },
       "parser": {
         "syntax": "typescript",
         "jsx": false,

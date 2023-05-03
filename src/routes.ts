@@ -7,11 +7,11 @@ import {
 import {
 	SingleMultipartForm,
 	singleMultipartFormBodySchema,
-} from "@useCases/single/multipartForm.js";
+} from "./useCases/single/multipartForm.js";
 import {
 	MultipleMultipartForm,
 	multipleMultipartFormBodySchema,
-} from "@useCases/multiple/multipartForm.js";
+} from "./useCases/multiple/multipartForm.js";
 
 export function routes(
 	fastify: FastifyInstance,
