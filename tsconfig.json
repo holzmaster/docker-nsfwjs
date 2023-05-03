@@ -3,6 +3,7 @@
     "target": "es2022",
     "module": "ES2022",
     "moduleResolution": "node",
+    "outDir": "dist",
     "lib": ["es6"],
     "removeComments": true,
     "esModuleInterop": true,

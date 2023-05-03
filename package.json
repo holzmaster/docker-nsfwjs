@@ -5,9 +5,8 @@
   "exports": "./dist/server.js",
   "license": "MIT",
   "scripts": {
-    "dev:server": "node --watch dist/server.js",
-    "start": "node dist/server.js",
-    "build": "swc src --copy-files --out-dir dist",
+    "test": "tsc --noEmit",
+    "build": "tsc",
     "lint": "rome check .",
     "lint:fix": "rome format . --write"
   },
