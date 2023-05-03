@@ -13,7 +13,7 @@
     "lint:fix": "rome format . --write"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint",
+    "pre-commit": "npm lint",
     "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
   },
   "config": {
