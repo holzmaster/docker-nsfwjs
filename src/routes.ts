@@ -39,9 +39,14 @@ export async function routes(
 		async (req, res) => {
 			const image = (req.body as any).content[0] as BodyEntry;
 
-			return res.send({
-				prediction: await getPrediction(image.data),
-			});
+			try {
+				return res.send({
+					prediction: await getPrediction(image.data),
+				});
+			} catch(err) {
+				console.error(err);
+				return res.status(500).send({ error: "Internal Server Error" });
+			}
 		},
 	);
 
@@ -70,7 +75,12 @@ export async function routes(
 				images.map(async (image) => getPrediction(image.data)),
 			);
 
-			return res.send({ predictions });
+			try {
+				return res.send({ predictions });
+			} catch(err) {
+				console.error(err);
+				return res.status(500).send({ error: "Internal Server Error" });
+			}
 		},
 	);
 }
