@@ -43,7 +43,7 @@ export async function routes(
 				return res.send({
 					prediction: await getPrediction(image.data),
 				});
-			} catch(err) {
+			} catch (err) {
 				console.error(err);
 				return res.status(500).send({ error: "Internal Server Error" });
 			}
@@ -77,7 +77,7 @@ export async function routes(
 
 			try {
 				return res.send({ predictions });
-			} catch(err) {
+			} catch (err) {
 				console.error(err);
 				return res.status(500).send({ error: "Internal Server Error" });
 			}
