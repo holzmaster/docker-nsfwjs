@@ -27,11 +27,23 @@ fastifyServer.register(routes);
 
 await fastifyServer.listen({ port: config.port, host: config.host });
 
-console.log("Server started 🚀");
-
-process.on("SIGINT", () => handleOnSignal("SIGINT"));
-process.on("SIGHUP", () => handleOnSignal("SIGHUP"));
-function handleOnSignal(signal: NodeJS.Signals) {
-	console.log(`closing due to ${signal} signal`);
-	fastifyServer.close().then(() => process.exit());
+function closeGracefully(signal: string) {
+	console.log(`Received ${signal}. Closing gracefully...`);
+	fastifyServer.close().then(
+		() => {
+			console.log("Server closed gracefully.");
+			process.kill(process.pid, signal);
+		},
+		(err) => {
+			console.error("Error while closing server gracefully.", err);
+			process.kill(process.pid, signal);
+		},
+	);
 }
+
+process.once("SIGINT", closeGracefully);
+process.once("SIGTERM", closeGracefully);
+
+await fastifyServer.ready();
+
+console.log("Server started 🚀");
