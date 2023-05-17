@@ -14,10 +14,7 @@ type BodyEntry = {
 	limit: false;
 };
 
-export async function routes(
-	fastify: ServerInstance,
-	_opts: FastifyRegisterOptions<FastifyPluginOptions> | undefined,
-) {
+export async function routes(fastify: ServerInstance) {
 	fastify.post(
 		"/single/multipart-form",
 		{
