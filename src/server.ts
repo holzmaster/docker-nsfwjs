@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import fastify from "fastify";
 import multipart from "@fastify/multipart";
 import serveStatic from "@fastify/static";
+import swagger from "@fastify/swagger";
+import swaggerUi from "@fastify/swagger-ui";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
 import config from "./config.js";
@@ -24,6 +26,25 @@ server.register(multipart, {
 server.register(serveStatic, {
 	root: resolve(config.modelDir),
 	prefix: "/model/",
+});
+
+server.register(swagger, {
+	mode: "dynamic",
+	prefix: "/docs",
+	openapi: {
+		info: {
+			title: "nsfwjs API",
+			version: "3.0.0",
+		},
+	},
+});
+
+server.register(swaggerUi, {
+	routePrefix: "/docs",
+	uiConfig: {
+		docExpansion: "full",
+		deepLinking: false,
+	},
 });
 
 server.register(routes);
