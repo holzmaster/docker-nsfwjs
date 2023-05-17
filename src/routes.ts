@@ -26,7 +26,7 @@ const ErrorResponseType = Type.Object({
 	error: Type.String(),
 });
 
-export async function routes(fastify: ServerInstance) {
+export default async function routes(fastify: ServerInstance) {
 	fastify.post(
 		"/classify",
 		{

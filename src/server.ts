@@ -6,7 +6,7 @@ import serveStatic from "@fastify/static";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
 import config from "./config.js";
-import { routes } from "./routes.js";
+import routes from "./routes.js";
 
 const server = fastify({
 	bodyLimit: 1048576 * 100,
