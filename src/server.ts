@@ -3,33 +3,36 @@ import { resolve } from "node:path";
 import fastify from "fastify";
 import multipart from "@fastify/multipart";
 import serveStatic from "@fastify/static";
+import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
 import config from "./config.js";
 import { routes } from "./routes.js";
 
-const fastifyServer = fastify({
+const server = fastify({
 	bodyLimit: 1048576 * 100,
-});
+}).withTypeProvider<TypeBoxTypeProvider>();
 
-fastifyServer.register(multipart, {
+export type ServerInstance = typeof server;
+
+server.register(multipart, {
 	addToBody: true,
 	sharedSchemaId: "#sharedSchema",
 });
 
 // Crappy but working solution. Loading models only seems to be stable when using HTTP, not file://
 // https://github.com/infinitered/nsfwjs/discussions/738#discussioncomment-5792593
-fastifyServer.register(serveStatic, {
+server.register(serveStatic, {
 	root: resolve(config.modelDir),
 	prefix: "/model/",
 });
 
-fastifyServer.register(routes);
+server.register(routes);
 
-await fastifyServer.listen({ port: config.port, host: config.host });
+await server.listen({ port: config.port, host: config.host });
 
 function closeGracefully(signal: string) {
 	console.log(`Received ${signal}. Closing gracefully...`);
-	fastifyServer.close().then(
+	server.close().then(
 		() => {
 			console.log("Server closed gracefully.");
 			process.kill(process.pid, signal);
@@ -44,6 +47,6 @@ function closeGracefully(signal: string) {
 process.once("SIGINT", closeGracefully);
 process.once("SIGTERM", closeGracefully);
 
-await fastifyServer.ready();
+await server.ready();
 
 console.log("Server started 🚀");

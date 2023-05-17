@@ -1,9 +1,9 @@
 import {
-	FastifyInstance,
 	FastifyPluginOptions,
 	FastifyRegisterOptions,
 } from "fastify";
 
+import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./getPrediction.js";
 
 type BodyEntry = {
@@ -15,7 +15,7 @@ type BodyEntry = {
 };
 
 export async function routes(
-	fastify: FastifyInstance,
+	fastify: ServerInstance,
 	_opts: FastifyRegisterOptions<FastifyPluginOptions> | undefined,
 ) {
 	fastify.post(
