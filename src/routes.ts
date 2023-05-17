@@ -1,8 +1,3 @@
-import {
-	FastifyPluginOptions,
-	FastifyRegisterOptions,
-} from "fastify";
-
 import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./getPrediction.js";
 import { Type } from "@fastify/type-provider-typebox";
