@@ -13,9 +13,9 @@
   "dependencies": {
     "@fastify/multipart": "^7.6.0",
     "@fastify/static": "^6.10.1",
-    "@tensorflow/tfjs-node": "^4.4.0",
+    "@tensorflow/tfjs-node": "^4.5.0",
     "fastify": "^4.17.0",
-    "nsfwjs": "^2.2.0",
+    "nsfwjs": "^2.4.2",
     "sharp": "^0.32.1"
   },
   "devDependencies": {
