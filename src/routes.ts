@@ -1,6 +1,5 @@
 import type { ServerInstance } from "./server.js";
-import { getPrediction } from "./getPrediction.js";
-import { Type } from "@fastify/type-provider-typebox";
+import { getPrediction } from "./prediction.js";
 
 type BodyEntry = {
 	data: Buffer;
