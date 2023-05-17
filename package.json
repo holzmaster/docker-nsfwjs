@@ -7,7 +7,7 @@
   "scripts": {
     "test": "tsc --noEmit",
     "build": "tsc",
-    "lint": "rome check .",
+    "ci": "rome ci .",
     "lint:fix": "rome format . --write"
   },
   "dependencies": {
