@@ -1,5 +1,8 @@
 {
-	"$schema": "./node_modules/rome/configuration_schema.json",
+	"$schema": "https://docs.rome.tools/schemas/12.1.0/schema.json",
+	"organizeImports": {
+		"enabled": false
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -15,7 +18,8 @@
 			}
 		}
 	},
-	"files": {
-		"ignore": ["node_modules/*", "dist/*"]
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git"
 	}
 }
