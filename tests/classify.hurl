@@ -1,7 +1,7 @@
 POST http://localhost:8080
 HTTP 404
 
-POST http://localhost:8080/single/multipart-form
+POST http://localhost:8080/classify
 [MultipartFormData]
 # https://pixabay.com/photos/kitty-playful-flowers-wildflowers-2948404/
 content: file,kitty.jpg;

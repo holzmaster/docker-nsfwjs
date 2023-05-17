@@ -1,6 +1,9 @@
+import { type Static, Type } from "@fastify/type-provider-typebox";
+
 import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./prediction.js";
 
+const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" })
 type BodyEntry = {
 	data: Buffer;
 	filename: string;
@@ -9,50 +12,42 @@ type BodyEntry = {
 	limit: false;
 };
 
-const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" })
+const PredictionType = Type.Object({
+	neutral: Type.Number(),
+	drawing: Type.Number(),
+	porn: Type.Number(),
+	sexy: Type.Number(),
+	hentai: Type.Number(),
+});
+
+export type Prediction = Static<typeof PredictionType>;
+
+const ErrorResponseType = Type.Object({
+	error: Type.String(),
+});
 
 export async function routes(fastify: ServerInstance) {
 	fastify.post(
-		"/single/multipart-form",
+		"/classify",
 		{
 			schema: {
 				body: Type.Object({
 					content: Type.Array(MultipartContent),
 				}),
+				response: {
+					200: Type.Object({
+						prediction: PredictionType,
+					}),
+					500: ErrorResponseType,
+				},
 			},
 		},
 		async (req, res) => {
-			const image = (req.body as any).content[0] as BodyEntry;
+			const image = req.body.content[0] as BodyEntry;
 
 			try {
-				return res.send({
-					prediction: await getPrediction(image.data),
-				});
-			} catch (err) {
-				console.error(err);
-				return res.status(500).send({ error: "Internal Server Error" });
-			}
-		},
-	);
-
-	fastify.post(
-		"/multiple/multipart-form",
-		{
-			schema: {
-				body: Type.Object({
-					content: Type.Array(MultipartContent),
-				}),
-			},
-		},
-		async (req, res) => {
-			const images = (req.body as any).contents as BodyEntry[];
-
-			const predictions = await Promise.all(
-				images.map(async (image) => getPrediction(image.data)),
-			);
-
-			try {
-				return res.send({ predictions });
+				const prediction = await getPrediction(image.data);
+				return res.send({ prediction });
 			} catch (err) {
 				console.error(err);
 				return res.status(500).send({ error: "Internal Server Error" });
