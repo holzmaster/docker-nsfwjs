@@ -8,7 +8,7 @@
     "test": "tsc --noEmit",
     "build": "tsc",
     "ci": "rome ci .",
-    "lint:fix": "rome format . --write"
+    "format": "rome format . --write"
   },
   "dependencies": {
     "@fastify/multipart": "^7.6.0",
