@@ -5,6 +5,7 @@ import {
 
 import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./getPrediction.js";
+import { Type } from "@fastify/type-provider-typebox";
 
 type BodyEntry = {
 	data: Buffer;
@@ -14,23 +15,16 @@ type BodyEntry = {
 	limit: false;
 };
 
+const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" })
+
 export async function routes(fastify: ServerInstance) {
 	fastify.post(
 		"/single/multipart-form",
 		{
 			schema: {
-				body: {
-					type: "object",
-					properties: {
-						content: {
-							type: "array",
-							items: {
-								$ref: "#sharedSchema",
-							},
-						},
-					},
-					required: ["content"],
-				},
+				body: Type.Object({
+					content: Type.Array(MultipartContent),
+				}),
 			},
 		},
 		async (req, res) => {
@@ -51,18 +45,9 @@ export async function routes(fastify: ServerInstance) {
 		"/multiple/multipart-form",
 		{
 			schema: {
-				body: {
-					type: "object",
-					properties: {
-						contents: {
-							type: "array",
-							items: {
-								$ref: "#sharedSchema",
-							},
-						},
-					},
-					required: ["contents"],
-				},
+				body: Type.Object({
+					content: Type.Array(MultipartContent),
+				}),
 			},
 		},
 		async (req, res) => {
