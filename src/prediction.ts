@@ -26,9 +26,7 @@ export async function getPrediction(
 		const prediction = await model.classify(tfImage);
 		return simplifyPrediction(prediction);
 	} finally {
-		if (tfImage) {
-			tfImage.dispose();
-		}
+		tfImage?.dispose();
 	}
 }
 
