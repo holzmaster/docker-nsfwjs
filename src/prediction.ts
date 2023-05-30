@@ -23,7 +23,7 @@ export async function getPrediction(
 	let tfImage;
 	try {
 		tfImage = tf.node.decodeImage(jpeg, 3);
-		const prediction = await model.classify(tfImage);
+		const prediction = await model.classify(tfImage as any);
 		return simplifyPrediction(prediction);
 	} finally {
 		tfImage?.dispose();
