@@ -27,6 +27,10 @@ const ErrorResponseType = Type.Object({
 });
 
 export default async function routes(fastify: ServerInstance) {
+	fastify.get("/_health", async () => {
+		return { status: "ok" };
+	});
+
 	fastify.post(
 		"/classify",
 		{
