@@ -40,8 +40,8 @@ FROM node:buster-slim
 
     COPY --from=builder /usr/app/dist /app/dist
 
-    EXPOSE 3333
+    EXPOSE 8080
     CMD ["node", "dist/server.js"]
 
     HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-        CMD curl --fail -I http://localhost:3333/_health
+        CMD curl --fail -I http://localhost:8080/_health
