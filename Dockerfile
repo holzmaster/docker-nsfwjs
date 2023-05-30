@@ -26,6 +26,12 @@ FROM alpine:latest as model
 
 FROM node:buster-slim
     WORKDIR /app
+
+    RUN apt-get update -yqqq \
+        && apt-get install -yqqq curl \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
     ENV MODEL_DIR=/model
     COPY --from=model /model /model
 
