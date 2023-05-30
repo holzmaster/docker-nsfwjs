@@ -36,3 +36,6 @@ FROM node:buster-slim
 
     EXPOSE 3333
     CMD ["node", "dist/server.js"]
+
+    HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+        CMD curl --fail -I http://localhost:3333/_health
