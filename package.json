@@ -14,7 +14,7 @@
     "@fastify/multipart": "^7.7.0",
     "@fastify/static": "^6.10.2",
     "@fastify/swagger": "^8.6.0",
-    "@fastify/swagger-ui": "^1.9.2",
+    "@fastify/swagger-ui": "^1.9.3",
     "@fastify/type-provider-typebox": "^3.2.0",
     "@tensorflow/tfjs-node": "^4.6.0",
     "fastify": "^4.17.0",
