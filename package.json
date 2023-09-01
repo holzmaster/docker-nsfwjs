@@ -11,7 +11,7 @@
     "format": "rome format . --write"
   },
   "dependencies": {
-    "@fastify/multipart": "^7.7.0",
+    "@fastify/multipart": "^7.7.3",
     "@fastify/static": "^6.10.2",
     "@fastify/swagger": "^8.8.0",
     "@fastify/swagger-ui": "^1.9.3",
