@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@fastify/multipart": "^7.7.3",
-    "@fastify/static": "^6.10.2",
+    "@fastify/static": "^6.11.2",
     "@fastify/swagger": "^8.10.1",
     "@fastify/swagger-ui": "^1.9.3",
     "@fastify/type-provider-typebox": "^3.5.0",
