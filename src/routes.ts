@@ -3,7 +3,7 @@ import { type Static, Type } from "@fastify/type-provider-typebox";
 import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./prediction.js";
 
-const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" })
+const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" });
 type BodyEntry = {
 	data: Buffer;
 	filename: string;
