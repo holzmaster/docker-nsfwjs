@@ -3,15 +3,6 @@ import { type Static, Type } from "@fastify/type-provider-typebox";
 import type { ServerInstance } from "./server.js";
 import { getPrediction } from "./prediction.js";
 
-const MultipartContent = Type.Unsafe({ $ref: "#sharedSchema" });
-type BodyEntry = {
-	data: Buffer;
-	filename: string;
-	encoding: string;
-	mimetype: string;
-	limit: false;
-};
-
 const PredictionType = Type.Object({
 	neutral: Type.Number(),
 	drawing: Type.Number(),
@@ -35,9 +26,14 @@ export default async function routes(fastify: ServerInstance) {
 		"/classify",
 		{
 			schema: {
-				body: Type.Object({
-					content: Type.Array(MultipartContent),
-				}),
+				consumes: ["multipart/form-data"],
+				body: {
+					type: "object",
+					required: ["content"],
+					properties: {
+						content: { isFile: true },
+					},
+				},
 				response: {
 					200: Type.Object({
 						prediction: PredictionType,
@@ -47,10 +43,14 @@ export default async function routes(fastify: ServerInstance) {
 			},
 		},
 		async (req, res) => {
-			const image = req.body.content[0] as BodyEntry;
+			const content = (req.body as { content: { toBuffer(): Buffer } }).content;
+			if (!content) {
+				return res.status(400).send({ error: "Missing file" });
+			}
 
+			const imageBuffer = await content.toBuffer();
 			try {
-				const prediction = await getPrediction(image.data);
+				const prediction = await getPrediction(imageBuffer);
 				return res.send({ prediction });
 			} catch (err) {
 				console.error(err);

@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 
 import fastify from "fastify";
-import multipart from "@fastify/multipart";
+import multipart, { ajvFilePlugin } from "@fastify/multipart";
 import serveStatic from "@fastify/static";
 import swagger from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
@@ -12,13 +12,19 @@ import routes from "./routes.js";
 
 const server = fastify({
 	bodyLimit: 1048576 * 100,
+	ajv: {
+		plugins: [ajvFilePlugin],
+	},
 }).withTypeProvider<TypeBoxTypeProvider>();
 
 export type ServerInstance = typeof server;
 
 server.register(multipart, {
-	addToBody: true,
-	sharedSchemaId: "#sharedSchema",
+	attachFieldsToBody: true,
+	limits: {
+		files: 1,
+		fileSize: 50 * 1024 * 1024,
+	},
 });
 
 // Crappy but working solution. Loading models only seems to be stable when using HTTP, not file://
