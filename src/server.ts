@@ -17,6 +17,7 @@ const server = fastify({
 export type ServerInstance = typeof server;
 
 server.register(multipart, {
+	attachFieldsToBody: true,
 	sharedSchemaId: "#sharedSchema",
 });
 
