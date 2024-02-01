@@ -13,6 +13,10 @@ const PredictionType = Type.Object({
 
 export type Prediction = Static<typeof PredictionType>;
 
+const ErrorResponseType = Type.Object({
+	error: Type.String(),
+});
+
 export default async function routes(fastify: ServerInstance) {
 	fastify.get("/_health", async () => {
 		return { status: "ok" };
@@ -29,6 +33,12 @@ export default async function routes(fastify: ServerInstance) {
 					properties: {
 						content: { isFile: true },
 					},
+				},
+				response: {
+					200: Type.Object({
+						prediction: PredictionType,
+					}),
+					500: ErrorResponseType,
 				},
 			},
 		},
