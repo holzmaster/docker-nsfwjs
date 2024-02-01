@@ -20,7 +20,7 @@ export async function getPrediction(
 		})
 		.toBuffer();
 
-	let tfImage;
+	let tfImage: tf.Tensor3D | tf.Tensor4D | undefined;
 	try {
 		tfImage = tf.node.decodeImage(jpeg, 3);
 		const prediction = await model.classify(tfImage as any);
