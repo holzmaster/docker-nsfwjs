@@ -19,6 +19,10 @@ export type ServerInstance = typeof server;
 server.register(multipart, {
 	attachFieldsToBody: true,
 	sharedSchemaId: "#sharedSchema",
+	limits: {
+		files: 1,
+		fileSize: 100 * 1024 * 1024,
+	},
 });
 
 // Crappy but working solution. Loading models only seems to be stable when using HTTP, not file://
