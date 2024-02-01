@@ -12,11 +12,13 @@ import routes from "./routes.js";
 
 const server = fastify({
 	bodyLimit: 1048576 * 100,
+	ajv: {
+		plugins: [ajvFilePlugin],
+	},
 }).withTypeProvider<TypeBoxTypeProvider>();
 
 export type ServerInstance = typeof server;
 
-server.register(ajvFilePlugin);
 server.register(multipart, {
 	attachFieldsToBody: true,
 	limits: {
