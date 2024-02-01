@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 
 import fastify from "fastify";
-import multipart from "@fastify/multipart";
+import multipart, { ajvFilePlugin } from "@fastify/multipart";
 import serveStatic from "@fastify/static";
 import swagger from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
@@ -16,12 +16,12 @@ const server = fastify({
 
 export type ServerInstance = typeof server;
 
+server.register(ajvFilePlugin);
 server.register(multipart, {
 	attachFieldsToBody: true,
-	sharedSchemaId: "#sharedSchema",
 	limits: {
 		files: 1,
-		fileSize: 100 * 1024 * 1024,
+		fileSize: 50 * 1024 * 1024,
 	},
 });
 

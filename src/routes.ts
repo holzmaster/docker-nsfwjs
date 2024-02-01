@@ -18,20 +18,35 @@ export default async function routes(fastify: ServerInstance) {
 		return { status: "ok" };
 	});
 
-	fastify.post("/classify", async (req, res) => {
-		const file = await req.file();
-		if (!file) {
-			return res.status(400).send({ error: "Missing file" });
-		}
+	fastify.post(
+		"/classify",
+		{
+			schema: {
+				consumes: ["multipart/form-data"],
+				body: {
+					type: "object",
+					required: ["file"],
+					properties: {
+						file: { isFile: true },
+					},
+				},
+			},
+		},
+		async (req, res) => {
+			const file = await req.file();
+			if (!file) {
+				return res.status(400).send({ error: "Missing file" });
+			}
 
-		const imageBuffer = await file.toBuffer();
+			const imageBuffer = await file.toBuffer();
 
-		try {
-			const prediction = await getPrediction(imageBuffer);
-			return res.send({ prediction });
-		} catch (err) {
-			console.error(err);
-			return res.status(500).send({ error: "Internal Server Error" });
-		}
-	});
+			try {
+				const prediction = await getPrediction(imageBuffer);
+				return res.send({ prediction });
+			} catch (err) {
+				console.error(err);
+				return res.status(500).send({ error: "Internal Server Error" });
+			}
+		},
+	);
 }
