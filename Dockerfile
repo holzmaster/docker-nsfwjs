@@ -1,5 +1,7 @@
-FROM node:buster-slim as builder
-    WORKDIR /usr/app
+FROM node:buster-slim as base
+    WORKDIR /app
+
+FROM base as builder
     RUN --mount=type=bind,source=package.json,target=package.json \
         --mount=type=bind,source=package-lock.json,target=package-lock.json \
         --mount=type=cache,target=/root/.npm \
@@ -7,8 +9,7 @@ FROM node:buster-slim as builder
     COPY . .
     RUN npm run build
 
-FROM node:buster-slim as prod-dependencies
-    WORKDIR /usr/app
+FROM base as prod-dependencies
 
     RUN --mount=type=bind,source=package.json,target=package.json \
         --mount=type=bind,source=package-lock.json,target=package-lock.json \
@@ -29,8 +30,7 @@ FROM scratch as model
         https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/model.json \
         ./
 
-FROM node:buster-slim
-    WORKDIR /app
+FROM base
 
     RUN apt-get update -yqqq \
         && apt-get install -yqqq curl \
@@ -41,9 +41,9 @@ FROM node:buster-slim
     COPY --from=model /model /model
 
     COPY package.json package-lock.json ./
-    COPY --from=builder /usr/app/node_modules /app/node_modules
+    COPY --from=builder /app/node_modules /app/node_modules
 
-    COPY --from=builder /usr/app/dist /app/dist
+    COPY --from=builder /app/dist /app/dist
 
     EXPOSE 8080
     CMD ["node", "dist/server.js"]
