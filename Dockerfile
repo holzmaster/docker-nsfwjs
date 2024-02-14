@@ -32,11 +32,6 @@ FROM scratch as model
 
 FROM base
 
-    RUN apt-get update -yqqq \
-        && apt-get install -yqqq curl \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
-
     ENV MODEL_DIR=/model
     COPY --from=model /model /model
 
@@ -44,9 +39,10 @@ FROM base
     COPY --from=builder /app/node_modules /app/node_modules
 
     COPY --from=builder /app/dist /app/dist
+    COPY ./src/healthcheck.mjs /healthcheck.mjs
 
     EXPOSE 8080
     CMD ["node", "dist/server.js"]
 
     HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-        CMD curl --fail -I http://localhost:8080/_health
+        CMD /healthcheck.mjs
