@@ -15,18 +15,18 @@ FROM node:buster-slim as prod-dependencies
         --mount=type=cache,target=/root/.npm \
         npm ci --omit=dev
 
-FROM alpine:latest as model
+FROM scratch as model
     WORKDIR /model
 
     # Links taken from the repo of nsfwjs:
     # https://github.com/infinitered/nsfwjs
-    ADD https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard1of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard2of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard3of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard4of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard5of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/group1-shard6of6 \
-        https://github.com/infinitered/nsfwjs/raw/master/example/nsfw_demo/public/model/model.json \
+    ADD https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard1of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard2of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard3of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard4of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard5of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/group1-shard6of6 \
+        https://github.com/infinitered/nsfwjs/raw/master/examples/nsfw_demo/public/model/model.json \
         ./
 
 FROM node:buster-slim
