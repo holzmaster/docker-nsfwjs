@@ -37,7 +37,6 @@ jobs:
       - run: npm run build
       - uses: nikeee/setup-hurl@v2
       - run: |
-          ./load-model.sh
           node dist/server.js &
           sleep 2s
           hurl --test tests/classify.hurl
