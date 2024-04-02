@@ -7,8 +7,8 @@
   "scripts": {
     "test": "tsc --noEmit",
     "build": "tsc",
-    "ci": "biome ci .",
-    "format": "biome format . --write"
+    "ci": "biome ci src",
+    "format": "biome format src --write"
   },
   "dependencies": {
     "@fastify/multipart": "^8.2.0",
