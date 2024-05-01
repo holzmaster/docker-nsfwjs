@@ -35,7 +35,7 @@ jobs:
       - run: npm run ci
       - run: npm test
       - run: npm run build
-      - uses: nikeee/setup-hurl@v2
+      - uses: nikeee/setup-hurl@v3
       - run: |
           node dist/server.js &
           sleep 2s
