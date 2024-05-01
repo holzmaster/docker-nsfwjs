@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@fastify/multipart": "^8.2.0",
-    "@fastify/static": "^7.0.2",
+    "@fastify/static": "^7.0.3",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
     "@fastify/type-provider-typebox": "^4.0.0",
@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   }
 }
