@@ -1,7 +1,10 @@
-FROM node:buster-slim as base
+# syntax=docker/dockerfile:1
+# check=error=true
+
+FROM node:buster-slim AS base
     WORKDIR /app
 
-FROM base as builder
+FROM base AS builder
     RUN --mount=type=bind,source=package.json,target=package.json \
         --mount=type=bind,source=package-lock.json,target=package-lock.json \
         --mount=type=cache,target=/root/.npm \
@@ -9,7 +12,7 @@ FROM base as builder
     COPY . .
     RUN npm run build
 
-FROM base as runtime-dependencies
+FROM base AS runtime-dependencies
     RUN --mount=type=bind,source=package.json,target=package.json \
         --mount=type=bind,source=package-lock.json,target=package-lock.json \
         --mount=type=cache,target=/root/.npm \
