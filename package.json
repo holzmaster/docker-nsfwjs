@@ -13,7 +13,7 @@
   "dependencies": {
     "@fastify/multipart": "^8.3.0",
     "@fastify/static": "^7.0.4",
-    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^4.0.0",
     "@fastify/type-provider-typebox": "^4.0.0",
     "@tensorflow/tfjs-node": "^4.20.0",
