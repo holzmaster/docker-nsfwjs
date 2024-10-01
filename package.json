@@ -19,7 +19,7 @@
     "@tensorflow/tfjs-node": "^4.20.0",
     "fastify": "^4.28.1",
     "nsfwjs": "^4.1.0",
-    "sharp": "^0.33.4"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
