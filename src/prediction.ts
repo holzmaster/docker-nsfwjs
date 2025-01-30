@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-node";
 import nsfwjsPkg from "nsfwjs";
-import type { predictionType } from "nsfwjs";
+import type { PredictionType } from "nsfwjs";
 import sharp from "sharp";
 
 tf.enableProdMode();
@@ -31,7 +31,7 @@ export async function getPrediction(
 	}
 }
 
-type Prediction = predictionType[];
+type Prediction = PredictionType[];
 
 export interface PrettyPrediction {
 	neutral: number;
