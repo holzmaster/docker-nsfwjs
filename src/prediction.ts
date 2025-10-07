@@ -1,12 +1,12 @@
 import * as tf from "@tensorflow/tfjs-node";
-import nsfwjsPkg from "nsfwjs";
+import * as nsfwjs from "nsfwjs";
 import type { PredictionType } from "nsfwjs";
 import sharp from "sharp";
 
 tf.enableProdMode();
 
 // Using publicly hosted models. May fail some day because some random guy pulls down his s3 bucket
-const model = await nsfwjsPkg.load();
+const model = await nsfwjs.load();
 
 export async function getPrediction(
 	imageBuffer: Buffer,
