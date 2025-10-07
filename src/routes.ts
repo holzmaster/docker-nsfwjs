@@ -38,6 +38,7 @@ export default async function routes(fastify: ServerInstance) {
 					200: Type.Object({
 						prediction: PredictionType,
 					}),
+					400: ErrorResponseType,
 					500: ErrorResponseType,
 				},
 			},
