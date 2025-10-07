@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-FROM node:buster-slim AS base
+FROM node:22-buster-slim AS base
     WORKDIR /app
 
 FROM base AS builder
