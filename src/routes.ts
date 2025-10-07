@@ -38,12 +38,14 @@ export default async function routes(fastify: ServerInstance) {
 					200: Type.Object({
 						prediction: PredictionType,
 					}),
+					400: ErrorResponseType,
 					500: ErrorResponseType,
 				},
 			},
 		},
 		async (req, res) => {
-			const content = (req.body as { content: { toBuffer(): Buffer } }).content;
+			const content = (req.body as { content: { toBuffer(): Promise<Buffer> } })
+				.content;
 			if (!content) {
 				return res.status(400).send({ error: "Missing file" });
 			}
