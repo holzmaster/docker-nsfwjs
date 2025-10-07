@@ -49,7 +49,7 @@ export default async function routes(fastify: ServerInstance) {
 				return res.status(400).send({ error: "Missing file" });
 			}
 
-			const imageBuffer = await content.toBuffer();
+			const imageBuffer = content.toBuffer();
 			try {
 				const prediction = await getPrediction(imageBuffer);
 				return res.send({ prediction });
